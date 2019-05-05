@@ -2,7 +2,7 @@
   "name": "liri-node-app",
   "version": "1.0.0",
   "description": "Node Project Liri bot",
-  "main": "app.js",
+  "main": "liri.js",
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^7.0.0",
@@ -17,9 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/EricC44/liri-node-app.git"
   },
-  "keywords": [
-    "[]"
-  ],
+  "keywords": [],
   "author": "\"\"",
   "license": "ISC",
   "bugs": {

@@ -1,0 +1,5 @@
+We want the app it ignore these files
+
+node_modules/
+.env
+.DS_Store/

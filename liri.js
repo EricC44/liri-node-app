@@ -3,9 +3,9 @@ require("dotenv").config();
 //Require the Request
 var request = require("request");
 //Require file systems
-const fs = require("fs");
+//const fs = require("fs");
 //Rquire moment for Bands in Town information
-const moment = require("moment");
+//const moment = require("moment");
 //Require the Spotify key page here
 const keys = require("./keys.js");
 
@@ -14,7 +14,7 @@ const Spotify = require("node-spotify-api");
 const spotify = new Spotify(keys.spotify);
 
 //This is the OMDB API Key
-var omdb = (keys.omdb);
+//var omdb = (keys.omdb);
 //This is our users command and input, where the input can be multiple words because of slice and join.
 var userType = process.argv[2];
 var userQuery = process.argv.slice(3).join("");
@@ -26,8 +26,13 @@ function userPrompt(userType, userQuery) {
         case "spotify-this":
         spotifyThisSong();
         break;
+        case "do-this":
+        doThis(userQuery);
+        break;
     }
 }
+
+userCommand(userType, userQuery);
 
 
 function spotifyThisSong() {
@@ -61,4 +66,22 @@ function spotifyThisSong() {
             console.log("\n****************************************************\n")
         }
     }
+}
+function doThis() {
+    //Use the file systems method to access the random.txt page
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if(error) {
+            return console.log(`Error occured: ${error}`);
+        }
+        //Grab the data from the txt file and seperate the objects with the split method
+        var dataArry = data.split(",");
+        //Take the objects from the txt file and pass it through our userQuery parameters
+        userType = dataArry[0];
+        userQuery = dataArry[1];
+
+        //call the function with the new parameters
+        userCommand(userType, userQuery);
+    });
+
+
 }

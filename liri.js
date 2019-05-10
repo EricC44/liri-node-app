@@ -86,10 +86,20 @@ function concertThis() {
                 let theBand = JSON.parse(body);
                 //If there is any information on this band it will prepare a for loop for the later function
                 if(theBand.length > 0) {
-
+                    //This grabs the data we are looking for and displays the results
                     for(i = 0; i < 1; i++) {
-
+                        console.log("************************************")
+                        console.log(`\nI think I found what you are looking for...
+                                    \nArtist: ${theBand[i].lineup[0]}
+                                    \nVenue: ${theBand[i].venue.name}
+                                    \nLocation: ${theBand[i].venue.latitude}, ${theBand[i].venue.longitude}
+                                    \nCity and Country: ${theBand[i].venue.city}, ${theBand[i].venue.country}\n`)
+                        console.log("************************************")
                     }
+                }
+                //If there the api does not find any information on the band, this should pop up
+                else {
+                    console.log("I'm sorry, but I could not find the artist or location venue at this time...")
                 }
 
 

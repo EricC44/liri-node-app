@@ -5,7 +5,7 @@ var request = require("request");
 //Require file systems
 const fs = require("fs");
 //Rquire moment for Bands in Town information
-//const moment = require("moment");
+const moment = require("moment");
 //Require the Spotify key page here
 const keys = require("./keys.js");
 
@@ -15,6 +15,8 @@ const spotify = new Spotify(keys.spotify);
 
 //This is the OMDB API Key
 //var omdb = (keys.omdb);
+//This is our Bands In Town API key
+var bands = (keys.bandsInTown)
 //This is our users command and input, where the input can be multiple words because of slice and join.
 var userType = process.argv[2];
 var userQuery = process.argv.slice(3).join("");
@@ -26,6 +28,12 @@ function userPrompt(userType, userQuery) {
         case "spotify-this":
         spotifyThisSong();
         break;
+        case "concert-this":
+        concertThis();
+        break;
+        case "movie-this":
+        movieThis();
+        break;
         case "do-this":
         doThis(userQuery);
         break;
@@ -33,14 +41,6 @@ function userPrompt(userType, userQuery) {
 }
 
 userPrompt(userType, userQuery);
-// spotify
-//   .search({ type: 'track', query: 'All the Small Things' })
-//   .then(function(response) {
-//     console.log(response);
-//   })
-//   .catch(function(err) {
-//     console.log(err);
-//   });
 
 function spotifyThisSong() {
     
@@ -75,6 +75,34 @@ function spotifyThisSong() {
         
     });
 }
+
+function concertThis() {
+    console.log(`\n...Finding ${userQuery}...\n`)
+
+    request(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=${bands}`, function(error, response, body) {
+        //Assuming there is no error and the response is a code 200(which means everything is functioning as expected)
+            if(!error && response.statusCode === 200) {
+                //This grabs the data and formats the data through JSON as well as parsing it
+                let theBand = JSON.parse(body);
+                //If there is any information on this band it will prepare a for loop for the later function
+                if(theBand.length > 0) {
+
+                    for(i = 0; i < 1; i++) {
+
+                    }
+                }
+
+
+            }
+    });
+
+}
+
+function movieThis() {
+
+
+}
+//This part of the function is going to do things with our random txt. file
 function doThis() {
     //Use the file systems method to access the random.txt page
     fs.readFile("random.txt", "utf8", function(error, data) {

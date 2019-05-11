@@ -9,10 +9,6 @@ exports.bandsInTown = {
     id: process.env.BANDSINTOWN_ID
 }
 //This is the OMDB process.env call to prepare to be exported 
-//exports.omdb = {
-    //id: process.env.OMDB_ID
-//}
-//This is the mapqu
-//exports.mapquest = {
-    //id: process.env.MAPQUEST_ID
-//}
+exports.omdb = {
+    id: process.env.OMDB_ID
+}

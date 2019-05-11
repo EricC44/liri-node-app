@@ -94,7 +94,10 @@ function concertThis() {
                                     \nVenue: ${theBand[i].venue.name}
                                     \nLocation: ${theBand[i].venue.latitude}, ${theBand[i].venue.longitude}
                                     \nCity and Country: ${theBand[i].venue.city}, ${theBand[i].venue.country}\n`)
-                        console.log("************************************")
+                        //This is where the moment.js require is most inportant, as we need to formate the date
+                        let date = moment(theBand[i].datetime).format("MM/DD/YYYY hh:00 A");
+                        console.log(`\nDate and Time: ${date}\n`);
+                        console.log("************************************");
                     }
                 }
                 //If there the api does not find any information on the band, this should pop up

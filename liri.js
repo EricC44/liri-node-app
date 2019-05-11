@@ -14,7 +14,7 @@ const Spotify = require("node-spotify-api");
 const spotify = new Spotify(keys.spotify);
 
 //This is the OMDB API Key
-//var omdb = (keys.omdb);
+var omdb = (keys.omdb);
 //This is our Bands In Town API key
 var bands = (keys.bandsInTown)
 //This is our users command and input, where the input can be multiple words because of slice and join.
@@ -37,6 +37,8 @@ function userPrompt(userType, userQuery) {
         case "do-this":
         doThis(userQuery);
         break;
+        default:
+        console.log("Im sorry, but I don't understand what you are trying to ask...")
     }
 }
 
@@ -78,7 +80,7 @@ function spotifyThisSong() {
 
 function concertThis() {
     console.log(`\n...Finding ${userQuery}...\n`)
-
+    //this requests the bands in town api
     request(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=${bands}`, function(error, response, body) {
         //Assuming there is no error and the response is a code 200(which means everything is functioning as expected)
             if(!error && response.statusCode === 200) {
@@ -94,7 +96,7 @@ function concertThis() {
                                     \nVenue: ${theBand[i].venue.name}
                                     \nLocation: ${theBand[i].venue.latitude}, ${theBand[i].venue.longitude}
                                     \nCity and Country: ${theBand[i].venue.city}, ${theBand[i].venue.country}\n`)
-                        //This is where the moment.js require is most inportant, as we need to formate the date
+                        //This is where the moment.js require is most inportant, as we need to format the date
                         let date = moment(theBand[i].datetime).format("MM/DD/YYYY hh:00 A");
                         console.log(`\nDate and Time: ${date}\n`);
                         console.log("************************************");
@@ -112,6 +114,45 @@ function concertThis() {
 }
 
 function movieThis() {
+    console.log(`Finding ${userQuery}...`)
+    //If there is nothing in the userQuery, it will put the value "mr nobody"
+    if(!userQuery) {
+        userQuery = "mr nobody";
+    };
+    //This is the request to the omdb api 
+    request(`http://www.omdbapi.com/?t=${userQuery}&apikey=${omdb}`, function(error, response, body) {
+        //If something goes wrong, it will console.log the error
+        if(error) {
+            console.log(`Something went wrong... ${error}`);
+        };
+        //grabs the data from the omdb database
+        let movies = JSON.parse(body);
+        //This took me a very long time because it was nested, so I had to put my values into an array otherwise there would be no direct path to the information we need
+        let ratingsArray = movies.Ratings;
+        if(ratingsArray.length > 2) {}
+        //If there was no error and the response from the server was good, then we console.log the movies data
+        if(!error && response.statusCode === 200) {
+            //The data itself
+            console.log("*************************************");
+            console.log(`\n I think I found what you were looking for...
+                         \nTitle: ${movies.Title}
+                         \nCast: ${movies.Actors}
+                         \nRelease: ${movies.Year}
+                         \nINDB Rating: ${movies.imdbRating}
+                         \nRotten Tomatos: ${movies.Ratings[1].Value}
+                         \nCountry: ${movies.Country}
+                         \nLanguage: ${movies.Language}
+                         \nPlot: ${movies.Plot}`)
+            console.log("\n**********************************")
+        }
+        else {
+            console.log(`Hmm there seems to be a problem...${error}`)
+        }
+        
+
+    })
+
+
 
 
 }

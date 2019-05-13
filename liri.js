@@ -1,7 +1,7 @@
 //Require the dotenv file that has our hidden spotify codes
 require("dotenv").config();
 //Require the Request
-var request = require("request");
+//var request = require("request");
 //Require file systems
 const fs = require("fs");
 //Rquire moment for Bands in Town information
@@ -36,7 +36,7 @@ function userPrompt(userType, userQuery) {
         movieThis();
         break;
         case "do-this":
-        doThis(userQuery);
+        doThis();
         break;
         default:
         console.log("Im sorry, but I don't understand what you are trying to ask...")
@@ -111,7 +111,7 @@ function concertThis() {
 
     //         }
     // });
-
+    //This is my axios call to the bandsintown api, kept other code for trying to figure out else statement
     axios.get(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=codingbootcamp`)
   .then(function (response) {
     //this for function preps to console.log all possible values of the userQuery
@@ -131,7 +131,7 @@ function concertThis() {
             console.log("************************************");
         }
         else {
-            console.log(`Hmm...It seems like ${userQuery} is not performing on tour right now, check your spelling or try again`)
+         console.log(`Hmm...It seems like ${userQuery} is not performing on tour right now, check your spelling or try again`)
         }
         
     }
@@ -183,12 +183,11 @@ function doThis() {
         //Grab the data from the txt file and seperate the objects with the split method
         var dataArray = data.split(",");
         //Take the objects from the txt file and pass it through our userQuery parameters
-        userType = dataArray[0];
         userQuery = dataArray[1];
        
 
         //call the function with the new parameters
-        userPrompt(userType, userQuery);
+        spotifyThisSong(userQuery);
     });
 
 

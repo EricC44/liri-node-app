@@ -82,35 +82,63 @@ function spotifyThisSong() {
 function concertThis() {
     console.log(`\n...Finding ${userQuery}...\n`)
     //this requests the bands in town api
-    request(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=${bands}`, function(error, response, body) {
-        //Assuming there is no error and the response is a code 200(which means everything is functioning as expected)
-            if(!error && response.statusCode === 200) {
-                //This grabs the data and formats the data through JSON as well as parsing it
-                let theBand = JSON.parse(body);
-                //If there is any information on this band it will prepare a for loop for the later function
-                if(theBand.length > 0) {
-                    //This grabs the data we are looking for and displays the results
-                    for(i = 0; i < 1; i++) {
-                        console.log("************************************")
-                        console.log(`\nI think I found what you are looking for...
-                                    \nArtist: ${theBand[i].lineup[0]}
-                                    \nVenue: ${theBand[i].venue.name}
-                                    \nLocation: ${theBand[i].venue.latitude}, ${theBand[i].venue.longitude}
-                                    \nCity and Country: ${theBand[i].venue.city}, ${theBand[i].venue.country}\n`)
-                        //This is where the moment.js require is most inportant, as we need to format the date
-                        let date = moment(theBand[i].datetime).format("MM/DD/YYYY hh:00 A");
-                        console.log(`\nDate and Time: ${date}\n`);
-                        console.log("************************************");
-                    }
-                }
-                //If there the api does not find any information on the band, this should pop up
-                else {
-                    console.log("I'm sorry, but I could not find the artist or location venue at this time...")
-                }
+    // request(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=${bands}`, function(error, response, body) {
+    //     //Assuming there is no error and the response is a code 200(which means everything is functioning as expected)
+    //         if(!error && response.statusCode === 200) {
+    //             //This grabs the data and formats the data through JSON as well as parsing it
+    //             let theBand = JSON.parse(body);
+    //             //If there is any information on this band it will prepare a for loop for the later function
+    //             if(theBand.length > 0) {
+    //                 //This grabs the data we are looking for and displays the results
+    //                 for(i = 0; i < 1; i++) {
+    //                     console.log("************************************")
+    //                     console.log(`\nI think I found what you are looking for...
+    //                                 \nArtist: ${theBand[i].lineup[0]}
+    //                                 \nVenue: ${theBand[i].venue.name}
+    //                                 \nLocation: ${theBand[i].venue.latitude}, ${theBand[i].venue.longitude}
+    //                                 \nCity and Country: ${theBand[i].venue.city}, ${theBand[i].venue.country}\n`)
+    //                     //This is where the moment.js require is most inportant, as we need to format the date
+    //                     let date = moment(theBand[i].datetime).format("MM/DD/YYYY hh:00 A");
+    //                     console.log(`\nDate and Time: ${date}\n`);
+    //                     console.log("************************************");
+    //                 }
+    //             }
+    //             //If there the api does not find any information on the band, this should pop up
+    //             else {
+    //                 console.log("I'm sorry, but I could not find the artist or location venue at this time...")
+    //             }
 
 
-            }
-    });
+    //         }
+    // });
+
+    axios.get(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=codingbootcamp`)
+  .then(function (response) {
+    //this for function preps to console.log all possible values of the userQuery
+    for(let i = 0; i < response.data.length; i++) {
+        //This if function is to make sure we only grab data from the first value only
+        if(i <= 0) {
+            //data 
+            console.log("************************************")
+            console.log(`\nI think I found what you are looking for...
+                        \nArtist: ${response.data[i].lineup}
+                        \nVenue: ${response.data[i].venue.name}
+                        \nLocation: ${response.data[i].venue.latitude}, ${response.data[i].venue.longitude}
+                        \nCity and Country: ${response.data[i].venue.city}, ${response.data[i].venue.country}\n`)
+            //This is where the moment.js require is most inportant, as we need to format the date
+            let date = moment(response.data[i].datetime).format("MM/DD/YYYY hh:00 A");
+            console.log(`\nDate and Time: ${date}\n`);
+            console.log("************************************");
+        }
+        else {
+            console.log(`Hmm...It seems like ${userQuery} is not performing on tour right now, check your spelling or try again`)
+        }
+        
+    }
+})
+  .catch(function (error) {
+    console.log(`Something went wrong...${error}`);
+  });
 
 }
 
@@ -137,7 +165,7 @@ function movieThis() {
             console.log("\n**********************************")
     })
   .catch(function (error) {
-    console.log(error);
+    console.log(`Something went wrong: ${error}...`);
   });
  
 

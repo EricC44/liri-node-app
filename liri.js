@@ -8,7 +8,8 @@ const fs = require("fs");
 const moment = require("moment");
 //Require the Spotify key page here
 const keys = require("./keys.js");
-
+//require axios for omdb api
+var axios = require("axios");
 //This requires the spotify api as well as getting the key from the other script
 const Spotify = require("node-spotify-api");
 const spotify = new Spotify(keys.spotify);
@@ -119,38 +120,26 @@ function movieThis() {
     if(!userQuery) {
         userQuery = "mr nobody";
     };
-    //This is the request to the omdb api 
-    request(`http://www.omdbapi.com/?t=${userQuery}&apikey=${omdb}`, function(error, response, body) {
-        //If something goes wrong, it will console.log the error
-        if(error) {
-            console.log(`Something went wrong... ${error}`);
-        };
-        //grabs the data from the omdb database
-        let movies = JSON.parse(body);
-        //This took me a very long time because it was nested, so I had to put my values into an array otherwise there would be no direct path to the information we need
-        let ratingsArray = movies.Ratings;
-        if(ratingsArray.length > 2) {}
-        //If there was no error and the response from the server was good, then we console.log the movies data
-        if(!error && response.statusCode === 200) {
-            //The data itself
-            console.log("*************************************");
-            console.log(`\n I think I found what you were looking for...
-                         \nTitle: ${movies.Title}
-                         \nCast: ${movies.Actors}
-                         \nRelease: ${movies.Year}
-                         \nINDB Rating: ${movies.imdbRating}
-                         \nRotten Tomatos: ${movies.Ratings[1].Value}
-                         \nCountry: ${movies.Country}
-                         \nLanguage: ${movies.Language}
-                         \nPlot: ${movies.Plot}`)
+    //We are using axios get the data from the omdb database, then getting a response
+    axios.get(`http://www.omdbapi.com/?t=${userQuery}&apikey=trilogy`)
+  .then(function (response) {
+        //the data that prints out
+        console.log("*************************************");
+        console.log(`\n I think I found what you were looking for...
+                    \nTitle: ${response.data.Title}
+                    \nCast: ${response.data.Actors}
+                    \nRelease: ${response.data.Year}
+                    \nINDB Rating: ${response.data.imdbRating}
+                    \nRotten Tomatos: ${response.data.Ratings[1].Value}
+                    \nCountry: ${response.data.Country}
+                    \nLanguage: ${response.data.Language}
+                    \nPlot: ${response.data.Plot}`)
             console.log("\n**********************************")
-        }
-        else {
-            console.log(`Hmm there seems to be a problem...${error}`)
-        }
-        
-
     })
+  .catch(function (error) {
+    console.log(error);
+  });
+ 
 
 
 

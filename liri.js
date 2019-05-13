@@ -112,7 +112,7 @@ function concertThis() {
     //         }
     // });
     //This is my axios call to the bandsintown api, kept other code for trying to figure out else statement
-    axios.get(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=codingbootcamp`)
+    axios.get(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=${keys.bandsInTown.id}`)
   .then(function (response) {
     //this for function preps to console.log all possible values of the userQuery
     for(let i = 0; i < response.data.length; i++) {
@@ -130,9 +130,7 @@ function concertThis() {
             console.log(`\nDate and Time: ${date}\n`);
             console.log("************************************");
         }
-        else {
-         console.log(`Hmm...It seems like ${userQuery} is not performing on tour right now, check your spelling or try again`)
-        }
+        
         
     }
 })
@@ -149,7 +147,7 @@ function movieThis() {
         userQuery = "mr nobody";
     };
     //We are using axios get the data from the omdb database, then getting a response
-    axios.get(`http://www.omdbapi.com/?t=${userQuery}&apikey=trilogy`)
+    axios.get(`http://www.omdbapi.com/?t=${userQuery}&apikey=${keys.omdb.id}`)
   .then(function (response) {
         //the data that prints out
         console.log("*************************************");

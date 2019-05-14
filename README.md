@@ -3,7 +3,7 @@
 ### General Info
 ---
 * **Developer:** Eric Carlson
-* **Date Online:** 5/13/2019
+* **Date Online:** 5/11/2019
 * **Built With:** Node.js, Javascript
 * **APIs Used:** Spotify, BandsInTown, and OMDB
 
@@ -33,11 +33,51 @@ This project is called Liri.  Liri is almost the exact same as Siri, however Sir
 **do-this:** uses the built in *readFile()* method to access data from a prepopulated .txt file and return its information as a command/search query.
 
 ### How the bot works
+---
 
 **1. concert-this**
 *<command, artist/band>*
 
-This function calls the userType command and userQuery(artist/band) and returns the artist and other inportant concert info like the location and date.
+This function calls the userType command and userQuery(artist/band) and returns the artist and other important concert info like the location and date.
 
-![concert-this code](concert-this-code..png)
+![concert-this-code](https://user-images.githubusercontent.com/46227451/57681950-9805fa80-75e5-11e9-8826-3ac8bddc5104.png)
+
+![concert-this-action](https://user-images.githubusercontent.com/46227451/57682025-bff55e00-75e5-11e9-9b58-720963372458.png)
+
+**2. spotify-this**
+*<command, artist/band>*
+
+This function calls the userType command and userQuery(artist or band) and returns the information like artist name, album, and song name.  
+
+![spotify-this-code](https://user-images.githubusercontent.com/46227451/57682327-71948f00-75e6-11e9-832b-7617ea06d8f2.png)
+
+![spotify-this-action](https://user-images.githubusercontent.com/46227451/57682424-ac96c280-75e6-11e9-942e-39dab2e5a86a.png)
+
+**3. movie-this**
+*<command, movie>*
+
+This function calls the userType command and userQuery(movie name) and returns the movie title, the year released, the IMDb and Rotten Tomatos ratings, and other important features.
+
+![movie-this-code](https://user-images.githubusercontent.com/46227451/57682792-62621100-75e7-11e9-9d05-d167a0966ef0.png)
+
+![movie-this-action](https://user-images.githubusercontent.com/46227451/57682822-6d1ca600-75e7-11e9-9997-bccfd9389d53.png)
+
+**4. do-this**
+*<command, enter>*
+
+This function calles my random.txt file and plugs the info in the file to the userQuery then searches for that on the spotify api.  Uses the **fs** package.
+
+![do-this-code](https://user-images.githubusercontent.com/46227451/57683087-de5c5900-75e7-11e9-89d4-b4bad294f069.png)
+
+![do-this-action](https://user-images.githubusercontent.com/46227451/57683123-ecaa7500-75e7-11e9-88d3-f776804f2616.png)
+
+## Things I want to fix and additional features
+---
+* When a search result comes up negative in the bandsInTown api, I want to be able to console.log the error in question
+* I would love to create a log system that logs all my information to the random.txt file
+* I want to edit the colors of the results so they don't all appear as one color
+* Have some values that come up undefined in the spotify api to just have **-** instead of the undefined response
+
+
+
 

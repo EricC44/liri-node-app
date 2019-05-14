@@ -30,4 +30,10 @@ This project is called Liri.  Liri is almost the exact same as Siri, however Sir
 
 **movie-this:** Uses the API **OMDB** that takes the userQuery from the command line that returns the **title**, **actors**, **year**, **imdb Rating**, **rotten tomatos**, **country of creation**, **languages**, **plot**
 
-**do-this:** 
+**do-this:** uses the built in *readFile()* method to access data from a prepopulated .txt file and return its information as a command/search query.
+
+### How the bot works
+
+**1. concert-this**
+*<command, artist/band>*
+

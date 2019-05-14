@@ -7,4 +7,19 @@
 * **Built With:** Node.js, Javascript
 * **APIs Used:** Spotify, BandsInTown, and OMDB
 
+### About Liri Bot
+---
+This project is called Liri.  Liri is almost the exact same as Siri, however Siri is a **Speech** Interpretation and Recognition.  Liri is known as a **Language** Interpretation and Recognition.  This Liri is done using the *Node.js command line* that takes parameters and returns data.
+
+### Package requirements & Commands
+---
+*Note: You cannot skip this step or you cannot run the node packages*
+
+**Node Package** | **Install Command** | **About** | **Link** 
+------------ | ------------- | ------------ | -------              
+**Dotenv** | *Command Line: 'npm install dotenv'* | Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. | [Dotenv](https://www.npmjs.com/package/dotenv) 
+**Axios** | *Command Line: 'npm install axios'*  | *Promise* based HTTP client for the browser and node.js | [Axios](https://www.npmjs.com/package/axios)
+**Moment** | *Command Line: 'npm install moment'* | A lightweight JavaScript date library for **parsing, validating, manipulating, and formatting dates.** | [Moment](https://www.npmjs.com/package/moment)
+
+
  

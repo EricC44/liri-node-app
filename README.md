@@ -37,3 +37,7 @@ This project is called Liri.  Liri is almost the exact same as Siri, however Sir
 **1. concert-this**
 *<command, artist/band>*
 
+This function calls the userType command and userQuery(artist/band) and returns the artist and other inportant concert info like the location and date.
+
+![concert-this code](concert-this-code..png)
+
